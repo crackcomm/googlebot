@@ -15,7 +15,6 @@ type TSuite struct{}
 var _ = Suite(&TSuite{})
 
 func (s *TSuite) TestGoogleBot(c *C) {
-
 	for n, addr := range testData {
 		if count := strings.Count(addr, "."); count <= 2 {
 			c.Fatalf("invalid test data (line:%d)", n+1)
@@ -24,6 +23,7 @@ func (s *TSuite) TestGoogleBot(c *C) {
 		yes, err := IsGoogleBotWithCache(addr)
 		switch err.(type) {
 		case *net.DNSError:
+			c.Logf("dns error: %v", err)
 			continue
 		}
 
