@@ -14,7 +14,7 @@ func init() {
 	cacheIPs = cache.New(time.Second*360, time.Second*30)
 }
 
-// IsGoogleBot - Checks if given IP address is really Google IP address.
+// IsGoogleBot - Checks if given IP address is really Google Bot IP address.
 func IsGoogleBot(addr string) (yes bool, err error) {
 	addrs, err := net.LookupAddr(addr)
 	if err != nil || len(addrs) == 0 {
@@ -24,8 +24,8 @@ func IsGoogleBot(addr string) (yes bool, err error) {
 	return
 }
 
-// IsGoogleBotWithCache - Checks if given IP address is really Google IP address.
-// Uses in memory cache.
+// IsGoogleBotWithCache - Checks if given IP address is really Google Bot IP.
+// Uses in-memory cache.
 func IsGoogleBotWithCache(addr string) (yes bool, err error) {
 	if v, ok := cacheIPs.Get(addr); ok {
 		yes, _ = v.(bool)
